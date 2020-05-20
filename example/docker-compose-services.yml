@@ -1,0 +1,22 @@
+# https://docs.docker.com/compose/compose-file/
+version: "3.6"
+
+# https://docs.docker.com/compose/compose-file/#networks
+networks:
+  my-network:
+
+services:
+  appA:
+    # https://hub.docker.com/repository/docker/juliofalbo/dummy-prometheus-target/tags?page=1
+    image: juliofalbo/dummy-prometheus-target
+    networks:
+      - "my-network"
+    ports:
+      - "8080"
+  appB:
+    # https://hub.docker.com/repository/docker/juliofalbo/dummy-prometheus-target/tags?page=1
+    image: juliofalbo/dummy-prometheus-target
+    networks:
+      - "my-network"
+    ports:
+      - "8080"
