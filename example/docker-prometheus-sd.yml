@@ -1,0 +1,8 @@
+target_json_path: "/Users/jfa/workspace/docker-compose-prometheus-service-discovery/example"
+services:
+  - name: appA
+    container_prefix: "example_appA_"
+    internal_port: 8080
+  - name: appB
+    container_prefix: "example_appB_"
+    internal_port: 8080
