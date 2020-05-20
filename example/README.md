@@ -9,10 +9,10 @@ _Note: Considering that you are in the `docker-compose-prometheus-service-discov
 
 Now you can go to your `targets.json` file and check the content.
 
-Note: You can playing scaling up/down and checking the `targets.json` content.   
+Note: You can play scaling up/down and checking the `targets.json` content.   
 
 ### Monitoring
-By default we already have 2 dashboards showing the metrics from **appA** and **appB**
+By default, we already have 2 dashboards showing the metrics from **appA** and **appB**
 
 The dashboards are:
  - JVM Metrics
