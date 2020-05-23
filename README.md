@@ -32,6 +32,7 @@ The first thing that you need to configure is the `prometheus.yml` to enable the
     file_sd_configs:
       - files:
           - targets.json
+        refresh_interval: 5s
 ```
 
 Now that we already have Prometheus configured let's configure the Docker Compose Service Discovery.
@@ -60,7 +61,8 @@ services:
     internal_port: 8081
   ...
 ```
- 
+
+**Note: If you don't specify the `refresh_interval` property, the default value is 5min, it means that Prometheus will check the `targets.json` file every 5min.**
  
 ## Start
 To start this tool you can use the `start` command.
