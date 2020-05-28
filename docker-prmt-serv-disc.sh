@@ -72,7 +72,7 @@ function version
 #
 function getYamlFile {
   COUNTER=0;
-  YAML_FILE=('./docker-prometheus-sd.yml');
+  YAML_FILE=('./example/docker-prometheus-sd.yml');
   for setUpArgument in "$@"
   do
     COUNTER=$((COUNTER+1));
@@ -93,6 +93,8 @@ function do-start() {
 
   if [ -z "$SERVICE_RUNNING_PID" ]
   then
+    print_cyan "BASEDIR: $BASEDIR"
+    print_cyan "YAML_FILE_LOCATION: $YAML_FILE_LOCATION"
     nohup "$BASEDIR"/docker-prometheus-sd-service.sh "$YAML_FILE_LOCATION" 0<&- &> "$BASEDIR"/debug.log.file &
   else
     print_yellow "You are already a Docker Compose Prometheus Service Discovery running using the PID $SERVICE_RUNNING_PID"
@@ -109,7 +111,10 @@ function do-stop() {
   do
     kill -9 "$VAR_PID"
   done
+}
 
+function do-log() {
+  tail -f "$BASEDIR"/debug.log.file
 }
 
 #
@@ -132,8 +137,9 @@ do
         --yaml-file | -f)
         ;;
 
-        start \
-        | stop)
+        start  \
+        | stop \
+        | log)
             shift
             "do-$argument" "$@"
             exit 0

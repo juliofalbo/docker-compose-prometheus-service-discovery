@@ -16,7 +16,7 @@ function addPrometheusServiceDiscoveryService {
     CONTAINER_NUMBER=${var//$CONTAINER_PREFIX}
     CONTAINER_EXPOSED_PORT=$(docker port "$CONTAINER_PREFIX$CONTAINER_NUMBER" "$PORT" | cut -d':' -f 2)
 
-    echo "$CONTAINER_EXPOSED_PORT"
+    echo "CONTAINER_EXPOSED_PORT: $CONTAINER_EXPOSED_PORT"
     if [ ! -z "$CONTAINER_EXPOSED_PORT" ]
     then
       TARGETS+="\"host.docker.internal:$CONTAINER_EXPOSED_PORT\", "
@@ -55,7 +55,7 @@ fi
 
 function createPrometheusServiceDiscoveryFile {
   YAML_FILE="$1";
-  echo "$YAML_FILE"
+  echo "YAML_FILE: $YAML_FILE"
 
   TARGETS_JSON_PATH=$(yq r "$YAML_FILE" target_json_path)
 
@@ -79,6 +79,8 @@ function createPrometheusServiceDiscoveryFile {
 }
 
 while true; do
+  echo "Starting discovering"
   createPrometheusServiceDiscoveryFile "$1"
+  echo "------------"
   sleep 5
 done
